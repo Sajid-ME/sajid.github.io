@@ -55,10 +55,7 @@ const activateLink = () => {
 window.addEventListener('scroll', activateLink, { passive: true });
 
 // ─── CERTIFICATE REQUEST ───
-function openCertRequest(btn) {
-  const certName = btn.getAttribute('data-cert');
-  document.getElementById('modalCertName').textContent = 'Certificate: ' + certName;
-  document.getElementById('reqCertName').value = certName;
+function openCertRequest() {
   document.getElementById('certModal').style.display = 'flex';
   document.getElementById('certRequestForm').style.display = 'block';
   const oldSuccess = document.querySelector('.cert-modal-success');
@@ -83,6 +80,13 @@ async function sendCertRequest(event) {
   
   const form = document.getElementById('certRequestForm');
   const formData = new FormData(form);
+  
+  // Validate at least one certificate is selected
+  const selectedCerts = formData.getAll('certificates');
+  if (selectedCerts.length === 0) {
+    alert('Please select at least one certificate to request.');
+    return;
+  }
   
   try {
     const response = await fetch(form.action, {

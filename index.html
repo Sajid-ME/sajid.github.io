@@ -188,10 +188,6 @@
           <h4 class="cert-name">CAD Contest – Ignition 2026</h4>
           <p class="cert-desc">Participation certificate for CAD contest at Ignition 2026</p>
         </div>
-        <button class="cert-link cert-req-btn" data-cert="CAD Contest – Ignition 2026" onclick="openCertRequest(this)">
-          Request Access
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-        </button>
       </div>
     </div>
 
@@ -210,13 +206,17 @@
           <h4 class="cert-name">ANSYS: CFD & Heat Flow</h4>
           <p class="cert-desc">Course completion – organized by SSBD</p>
         </div>
-        <button class="cert-link cert-req-btn" data-cert="ANSYS: CFD & Heat Flow" onclick="openCertRequest(this)">
-          Request Access
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-        </button>
       </div>
     </div>
 
+  </div>
+
+  <!-- Single "Request Certificate" button -->
+  <div class="reveal" style="text-align: center; margin-top: 2rem;">
+    <button class="btn btn-fill" onclick="openCertRequest()">
+      Request Certificate Access
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:16px;height:16px;margin-left:0.5rem;display:inline-block;vertical-align:middle;"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+    </button>
   </div>
 
   <!-- Certificate Request Modal -->
@@ -224,10 +224,9 @@
     <div class="cert-modal">
       <button class="cert-modal-close" onclick="closeCertRequest()">&times;</button>
       <h3 class="cert-modal-title">Request Certificate Access</h3>
-      <p class="cert-modal-certname" id="modalCertName"></p>
+      <p class="cert-modal-certname">Select the certificate(s) you'd like to request</p>
       
-      <!-- ⚠️ Replace YOUR_FORM_ID with your actual Formspree endpoint -->
-      <form id="certRequestForm" action="https://formspree.io/f/meewjvqo" method="POST">
+      <form id="certRequestForm" onsubmit="sendCertRequest(event)" action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
         <div class="form-group">
           <label for="reqName">Your Name <span>*</span></label>
           <input type="text" id="reqName" name="name" placeholder="Enter your full name" required />
@@ -243,7 +242,21 @@
           <textarea id="reqPurpose" name="purpose" placeholder="Why are you requesting this certificate? (e.g., job application, academic verification, etc.)" rows="4" required></textarea>
         </div>
 
-        <input type="hidden" id="reqCertName" name="certificate" />
+        <!-- Certificate selection -->
+        <div class="form-group">
+          <label>Select Certificate(s) <span>*</span></label>
+          <div class="cert-checkbox-group">
+            <label class="cert-checkbox">
+              <input type="checkbox" name="certificates" value="CAD Contest – Ignition 2026" />
+              <span>CAD Contest – Ignition 2026</span>
+            </label>
+            <label class="cert-checkbox">
+              <input type="checkbox" name="certificates" value="ANSYS: CFD & Heat Flow" />
+              <span>ANSYS: CFD & Heat Flow</span>
+            </label>
+          </div>
+        </div>
+
         <input type="hidden" name="_next" value="false" />
         
         <button type="submit" class="btn btn-fill" style="width:100%; margin-top:0.5rem;">
@@ -253,7 +266,7 @@
       </form>
 
       <p class="cert-modal-note">
-        Your request will be reviewed, and the certificate will be shared with you via email.
+        Your request will be reviewed, and the selected certificate(s) will be shared with you via email.
       </p>
     </div>
   </div>
