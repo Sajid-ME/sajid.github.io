@@ -116,3 +116,42 @@ async function sendCertRequest(event) {
     alert('Network error. Please check your connection and try again.');
   }
 }
+// ─── TYPEWRITER EFFECT ───
+const words = ["Designer", "Simulator", "Analyst"];
+let wordIndex = 0;
+let charIndex = 0;
+let isDeleting = false;
+const typewriterEl = document.getElementById("typewriter");
+
+function typeEffect() {
+  const currentWord = words[wordIndex];
+  
+  if (!isDeleting) {
+    // Typing
+    typewriterEl.textContent = currentWord.substring(0, charIndex + 1);
+    charIndex++;
+    
+    if (charIndex === currentWord.length) {
+      // Finished typing, wait then start deleting
+      setTimeout(() => { isDeleting = true; }, 1500);
+      return;
+    }
+  } else {
+    // Deleting
+    typewriterEl.textContent = currentWord.substring(0, charIndex - 1);
+    charIndex--;
+    
+    if (charIndex === 0) {
+      isDeleting = false;
+      wordIndex = (wordIndex + 1) % words.length;
+      setTimeout(typeEffect, 300);
+      return;
+    }
+  }
+  
+  const speed = isDeleting ? 50 : 100;
+  setTimeout(typeEffect, speed);
+}
+
+// Start after the hero animations have played (1.2s delay)
+setTimeout(typeEffect, 1200);
