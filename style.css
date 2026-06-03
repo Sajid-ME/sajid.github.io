@@ -1005,24 +1005,3 @@ footer p {
   }
   footer { flex-direction: column; text-align: center; }
 }
-/* Tighter certificate cards */
-.cert-thumb {
-  height: 120px;   /* was 200px */
-}
-
-.cert-info {
-  padding: 1rem;   /* was 1.5rem */
-}
-
-.cert-name {
-  font-size: 1.1rem;   /* was 1.25rem */
-  margin-bottom: 0.3rem;
-}
-
-.cert-desc {
-  margin-bottom: 0.8rem;   /* was 1.2rem */
-}
-
-.cert-grid {
-  gap: 1.5rem;   /* was 2rem */
-}
