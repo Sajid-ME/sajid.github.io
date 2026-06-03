@@ -172,3 +172,18 @@ function toggleTheme() {
     document.body.classList.add('light');
   }
 })();
+// ─── THEME TOGGLE ───
+function toggleTheme() {
+  document.body.classList.toggle('light');
+  // Save preference
+  const isLight = document.body.classList.contains('light');
+  localStorage.setItem('theme', isLight ? 'light' : 'dark');
+}
+
+// Apply saved theme on load
+(function() {
+  const savedTheme = localStorage.getItem('theme');
+  if (savedTheme === 'light') {
+    document.body.classList.add('light');
+  }
+})();
