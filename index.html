@@ -6,6 +6,7 @@
   <title>Sajid — Mechanical Engineer · KUET</title>
   <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;500;600;700&family=Lora:ital,wght@0,400;0,500;1,400&family=JetBrains+Mono:wght@300;400&display=swap" rel="stylesheet" />
   <style>
+    /* ... (keep all your CSS exactly as before) ... */
     :root {
       --ink:   #07070D;
       --void:  #0B0B16;
@@ -30,7 +31,6 @@
       overflow-x: hidden;
     }
 
-    /* Blueprint grid overlay */
     body::before {
       content: '';
       position: fixed;
@@ -768,7 +768,6 @@
   <div class="corner corner-tr"></div>
   <div class="corner corner-bl"></div>
 
-  <!-- Decorative rotating gear -->
   <svg class="gear-deco" viewBox="0 0 200 200" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
     <path d="M100 55a45 45 0 1 0 0 90 45 45 0 0 0 0-90zm0 75a30 30 0 1 1 0-60 30 30 0 0 1 0 60z"/>
     <path d="M100 0 l8 22h-16L100 0z M100 200 l-8-22h16L100 200z M0 100 l22-8v16L0 100z M200 100 l-22 8v-16L200 100z M29.3 29.3 l18 14-11.3 11.3-14-18 7.3-7.3z M170.7 29.3 l-7.3 7.3-14-18 11.3-11.3 18 14-8 8z M29.3 170.7 l7.3-7.3 14 18-11.3 11.3-18-14 8-8z M170.7 170.7 l-18-14 11.3-11.3 14 18-7.3 7.3z"/>
@@ -788,10 +787,10 @@
     <a href="#contact" class="btn btn-ghost">Get in Touch</a>
   </div>
 
-  <!-- 👤 PROFILE PICTURE – Replace the empty src with your own image file -->
+  <!-- 👤 PROFILE PICTURE – Replace the empty src with your own image URL -->
   <div class="hero-portrait">
     <img src="" alt="Sajid - Portrait" />
-    <!-- Add the path to your photo: src="your-photo.jpg" -->
+    <!-- Add your photo path here, e.g.: src="Assets/photo.jpg" -->
   </div>
 
   <div class="scroll-hint">
@@ -901,7 +900,6 @@
 
     <!-- 📜 Certificate 1: CAD Contest -->
     <div class="cert-card">
-      <!-- PDF Thumbnail Icon – replace with an image if you have one -->
       <div class="cert-thumb">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
           <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
@@ -915,8 +913,7 @@
           <h4 class="cert-name">CAD Contest – Ignition 2026</h4>
           <p class="cert-desc">Participation certificate for CAD contest at Ignition 2026</p>
         </div>
-        <!-- Link to the actual PDF (relative path) -->
-        <a class="cert-link" href="Certificates/Certificate_CAD Contest.pdf" target="_blank" rel="noopener">
+        <a class="cert-link" href="Assets/Certificates/Certificate_CAD Contest.pdf" target="_blank" rel="noopener">
           View PDF
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
         </a>
@@ -938,7 +935,7 @@
           <h4 class="cert-name">ANSYS: CFD & Heat Flow</h4>
           <p class="cert-desc">Course completion – organized by SSBD</p>
         </div>
-        <a class="cert-link" href="Certificates/certificate_SSBDCE202504006.pdf" target="_blank" rel="noopener">
+        <a class="cert-link" href="Assets/Certificates/certificate_SSBDCE202504006.pdf" target="_blank" rel="noopener">
           View PDF
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
         </a>
@@ -1015,8 +1012,8 @@
         <span class="s-arrow">→</span>
       </a>
 
-      <!-- 📄 CV Download -->
-      <a href="Certificates & CV/My CV.pdf" class="social-item" target="_blank" rel="noopener">
+      <!-- 📄 CV Download (updated path) -->
+      <a href="Assets/My CV.pdf" class="social-item" target="_blank" rel="noopener">
         <svg class="s-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
           <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
           <polyline points="14 2 14 8 20 8"/>
@@ -1043,7 +1040,6 @@
 
 
 <script>
-  // Scroll reveal for .reveal elements
   const revealObserver = new IntersectionObserver(entries => {
     entries.forEach(e => {
       if (e.isIntersecting) {
@@ -1055,7 +1051,6 @@
 
   document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
 
-  // Staggered card reveals
   const cardObserver = new IntersectionObserver(entries => {
     entries.forEach(e => {
       if (e.isIntersecting) {
@@ -1068,7 +1063,6 @@
 
   document.querySelectorAll('.card').forEach(el => cardObserver.observe(el));
 
-  // Active nav highlight
   const sections = document.querySelectorAll('section[id]');
   const navLinks = document.querySelectorAll('.nav-links a');
 
