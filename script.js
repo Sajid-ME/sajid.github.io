@@ -116,6 +116,7 @@ async function sendCertRequest(event) {
     alert('Network error. Please check your connection and try again.');
   }
 }
+
 // ─── TYPEWRITER EFFECT ───
 const words = ["Designer", "Simulator", "Analyst"];
 let wordIndex = 0;
@@ -155,3 +156,19 @@ function typeEffect() {
 
 // Start after the hero animations have played (1.2s delay)
 setTimeout(typeEffect, 1200);
+
+// ─── THEME TOGGLE ───
+function toggleTheme() {
+  document.body.classList.toggle('light');
+  // Save preference
+  const isLight = document.body.classList.contains('light');
+  localStorage.setItem('theme', isLight ? 'light' : 'dark');
+}
+
+// Apply saved theme on load
+(function() {
+  const savedTheme = localStorage.getItem('theme');
+  if (savedTheme === 'light') {
+    document.body.classList.add('light');
+  }
+})();
