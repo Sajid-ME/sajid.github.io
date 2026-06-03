@@ -3,12 +3,10 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Welcome</title>
-  <!-- Favicon – replace href with your own .ico or .png if you have one -->
-<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='38' fill='none' stroke='%23E8A200' stroke-width='8'/%3E%3Ccircle cx='50' cy='50' r='16' fill='%23E8A200'/%3E%3Crect x='48' y='4' width='4' height='14' fill='%23E8A200'/%3E%3Crect x='48' y='82' width='4' height='14' fill='%23E8A200'/%3E%3Crect x='4' y='48' width='14' height='4' fill='%23E8A200'/%3E%3Crect x='82' y='48' width='14' height='4' fill='%23E8A200'/%3E%3C/svg%3E" />
+  <title>Sajid — Mechanical Engineer · KUET</title>
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='38' fill='none' stroke='%23E8A200' stroke-width='8'/%3E%3Ccircle cx='50' cy='50' r='16' fill='%23E8A200'/%3E%3Crect x='48' y='4' width='4' height='14' fill='%23E8A200'/%3E%3Crect x='48' y='82' width='4' height='14' fill='%23E8A200'/%3E%3Crect x='4' y='48' width='14' height='4' fill='%23E8A200'/%3E%3Crect x='82' y='48' width='14' height='4' fill='%23E8A200'/%3E%3C/svg%3E" />
   <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;500;600;700&family=Lora:ital,wght@0,400;0,500;1,400&family=JetBrains+Mono:wght@300;400&display=swap" rel="stylesheet" />
   <style>
-    /* ... (keep all your CSS exactly as before) ... */
     :root {
       --ink:   #07070D;
       --void:  #0B0B16;
@@ -47,6 +45,49 @@
       z-index: 0;
     }
 
+    /* ─── LOADER ─── */
+    #loader {
+      position: fixed;
+      inset: 0;
+      background: var(--ink);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      z-index: 9999;
+      transition: opacity 0.5s ease, visibility 0.5s ease;
+    }
+
+    #loader.hidden {
+      opacity: 0;
+      visibility: hidden;
+    }
+
+    .loader-gear {
+      width: 80px;
+      height: 80px;
+      color: var(--amber);
+      animation: loadSpin 2s linear infinite;
+    }
+
+    @keyframes loadSpin {
+      to { transform: rotate(360deg); }
+    }
+
+    .loader-text {
+      margin-top: 1.5rem;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.7rem;
+      letter-spacing: 0.2em;
+      color: var(--chalk);
+      animation: pulse 1.5s ease-in-out infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 0.6; }
+      50% { opacity: 1; }
+    }
+
     /* ─── NAV ─── */
     nav {
       position: fixed;
@@ -69,6 +110,26 @@
       letter-spacing: 0.14em;
       color: var(--amber);
       text-decoration: none;
+    }
+
+    /* Hamburger button */
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 4px;
+      z-index: 300;
+    }
+
+    .hamburger span {
+      display: block;
+      width: 24px;
+      height: 2px;
+      background: var(--amber);
+      transition: all 0.3s ease;
     }
 
     .nav-links {
@@ -607,6 +668,149 @@
       color: var(--ghost);
     }
 
+    /* ─── CERTIFICATE REQUEST MODAL ─── */
+    .cert-req-btn {
+      background: none;
+      border: none;
+      padding: 0;
+      font: inherit;
+      cursor: pointer;
+    }
+
+    .cert-modal-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(7, 7, 13, 0.92);
+      backdrop-filter: blur(12px);
+      z-index: 1000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 1.5rem;
+    }
+
+    .cert-modal {
+      background: var(--plate);
+      border: 1px solid rgba(232,162,0,0.25);
+      border-radius: 12px;
+      padding: 2.5rem 2rem;
+      max-width: 500px;
+      width: 100%;
+      position: relative;
+      box-shadow: 0 0 60px rgba(232,162,0,0.08);
+    }
+
+    .cert-modal-close {
+      position: absolute;
+      top: 1rem;
+      right: 1.2rem;
+      background: none;
+      border: none;
+      color: var(--chalk);
+      font-size: 1.5rem;
+      cursor: pointer;
+      transition: color 0.2s;
+      line-height: 1;
+    }
+
+    .cert-modal-close:hover {
+      color: var(--amber);
+    }
+
+    .cert-modal-title {
+      font-family: 'Rajdhani', sans-serif;
+      font-size: 1.6rem;
+      font-weight: 700;
+      color: var(--cream);
+      margin-bottom: 0.3rem;
+    }
+
+    .cert-modal-certname {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.7rem;
+      letter-spacing: 0.08em;
+      color: var(--amber);
+      margin-bottom: 1.8rem;
+      opacity: 0.8;
+    }
+
+    .form-group {
+      margin-bottom: 1.2rem;
+    }
+
+    .form-group label {
+      display: block;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.66rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--chalk);
+      margin-bottom: 0.4rem;
+    }
+
+    .form-group label span {
+      color: var(--amber);
+    }
+
+    .form-group input,
+    .form-group textarea {
+      width: 100%;
+      padding: 0.75rem 1rem;
+      background: var(--ink);
+      border: 1px solid rgba(232,162,0,0.15);
+      border-radius: 6px;
+      color: var(--cream);
+      font-family: 'Lora', Georgia, serif;
+      font-size: 0.9rem;
+      transition: border-color 0.3s;
+      resize: vertical;
+    }
+
+    .form-group input:focus,
+    .form-group textarea:focus {
+      outline: none;
+      border-color: var(--amber);
+    }
+
+    .form-group input::placeholder,
+    .form-group textarea::placeholder {
+      color: var(--ghost);
+      font-style: italic;
+    }
+
+    .cert-modal-note {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.62rem;
+      color: var(--ghost);
+      text-align: center;
+      margin-top: 1.5rem;
+      line-height: 1.6;
+    }
+
+    .cert-modal-success {
+      text-align: center;
+      padding: 1.5rem 0;
+    }
+
+    .cert-modal-success svg {
+      color: var(--amber);
+      margin-bottom: 1rem;
+    }
+
+    .cert-modal-success h4 {
+      font-family: 'Rajdhani', sans-serif;
+      font-size: 1.3rem;
+      color: var(--cream);
+      margin-bottom: 0.4rem;
+    }
+
+    .cert-modal-success p {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.7rem;
+      color: var(--chalk);
+      line-height: 1.7;
+    }
+
     /* ─── CONTACT ─── */
     .contact-layout {
       display: grid;
@@ -731,7 +935,38 @@
     /* ─── RESPONSIVE ─── */
     @media (max-width: 768px) {
       nav { padding: 0 1.5rem; }
-      .nav-links { display: none; }
+
+      .hamburger {
+        display: flex;
+      }
+
+      .nav-links {
+        position: fixed;
+        top: 0;
+        right: -100%;
+        width: 70%;
+        max-width: 300px;
+        height: 100vh;
+        background: var(--ink);
+        flex-direction: column;
+        padding: 5rem 2rem 2rem;
+        transition: right 0.35s ease;
+        border-left: 1px solid var(--line);
+        z-index: 250;
+      }
+
+      .nav-links.active {
+        right: 0;
+      }
+
+      .nav-links li {
+        margin-bottom: 2rem;
+      }
+
+      .nav-links a {
+        font-size: 1rem;
+      }
+
       #hero, .section { padding-left: 1.5rem; padding-right: 1.5rem; }
       .about-layout { grid-template-columns: 1fr; gap: 2.5rem; }
       .cards { grid-template-columns: 1fr; }
@@ -752,14 +987,32 @@
 </head>
 <body>
 
+<!-- ─── LOADING SCREEN ─── -->
+<div id="loader">
+  <svg class="loader-gear" viewBox="0 0 200 200" fill="none" stroke="currentColor" stroke-width="4" xmlns="http://www.w3.org/2000/svg">
+    <circle cx="100" cy="100" r="55" stroke-dasharray="345" stroke-dashoffset="0" opacity="0.2"/>
+    <path d="M100 45a55 55 0 1 0 0 110 55 55 0 0 0 0-110zm0 85a30 30 0 1 1 0-60 30 30 0 0 1 0 60z"/>
+    <path d="M100 0 l10 28h-20L100 0z M100 200 l-10-28h20L100 200z M0 100 l28-10v20L0 100z M200 100 l-28 10v-20L200 100z M22 22 l22 18-14 14-18-22 10-10z M178 22 l-10 10-18-22 14-14 22 18-8 8z M22 178 l10-10 18 22-14 14-22-18 8-8z M178 178 l-22-18 14-14 18 22-10 10z" fill="var(--amber)"/>
+  </svg>
+  <p class="loader-text">Initializing...</p>
+</div>
+
 <!-- ─── NAV ─── -->
 <nav>
   <a href="#hero" class="logo">M.K. Sajid</a>
-  <ul class="nav-links">
-    <li><a href="#about">About</a></li>
-    <li><a href="#interests">Interests</a></li>
-    <li><a href="#certificates">Certificates</a></li>
-    <li><a href="#contact">Contact</a></li>
+  
+  <!-- Hamburger button -->
+  <button class="hamburger" aria-label="Open menu" onclick="toggleMobileMenu()">
+    <span></span>
+    <span></span>
+    <span></span>
+  </button>
+
+  <ul class="nav-links" id="navLinks">
+    <li><a href="#about" onclick="closeMobileMenu()">About</a></li>
+    <li><a href="#interests" onclick="closeMobileMenu()">Interests</a></li>
+    <li><a href="#certificates" onclick="closeMobileMenu()">Certificates</a></li>
+    <li><a href="#contact" onclick="closeMobileMenu()">Contact</a></li>
   </ul>
 </nav>
 
@@ -789,10 +1042,8 @@
     <a href="#contact" class="btn btn-ghost">Get in Touch</a>
   </div>
 
-  <!-- 👤 PROFILE PICTURE – Replace the empty src with your own image URL -->
   <div class="hero-portrait">
     <img src="Assets/photo_2026-06-03_14-25-35.jpg" alt="Sajid - Portrait" />
-    <!-- Add your photo path here, e.g.: src="Assets/photo.jpg" -->
   </div>
 
   <div class="scroll-hint">
@@ -900,7 +1151,7 @@
 
   <div class="cert-grid reveal">
 
-    <!-- 📜 Certificate 1: CAD Contest -->
+    <!-- Certificate 1: CAD Contest -->
     <div class="cert-card">
       <div class="cert-thumb">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
@@ -915,14 +1166,14 @@
           <h4 class="cert-name">CAD Contest – Ignition 2026</h4>
           <p class="cert-desc">Participation certificate for CAD contest at Ignition 2026</p>
         </div>
-        <a class="cert-link" href="Assets/Certificates/Certificate_CAD%20Contest.pdf" target="_blank" rel="noopener">
-          View PDF
+        <button class="cert-link cert-req-btn" data-cert="CAD Contest – Ignition 2026" onclick="openCertRequest(this)">
+          Request Access
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-        </a>
+        </button>
       </div>
     </div>
 
-    <!-- 📜 Certificate 2: ANSYS CFD / Heat Flow -->
+    <!-- Certificate 2: ANSYS CFD / Heat Flow -->
     <div class="cert-card">
       <div class="cert-thumb">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
@@ -937,13 +1188,56 @@
           <h4 class="cert-name">ANSYS: CFD & Heat Flow</h4>
           <p class="cert-desc">Course completion – organized by SSBD</p>
         </div>
-        <a class="cert-link" href="Assets/Certificates/certificate_SSBDCE202504006.pdf" target="_blank" rel="noopener">
-          View PDF
+        <button class="cert-link cert-req-btn" data-cert="ANSYS: CFD & Heat Flow" onclick="openCertRequest(this)">
+          Request Access
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-        </a>
+        </button>
       </div>
     </div>
 
+  </div>
+
+  <!-- Certificate Request Modal -->
+  <div id="certModal" class="cert-modal-overlay" style="display:none;">
+    <div class="cert-modal">
+      <button class="cert-modal-close" onclick="closeCertRequest()">&times;</button>
+      <h3 class="cert-modal-title">Request Certificate Access</h3>
+      <p class="cert-modal-certname" id="modalCertName"></p>
+      
+      <!-- ⚠️ Replace YOUR_FORM_ID with your actual Formspree endpoint -->
+      <form id="certRequestForm" action="https://formspree.io/f/meewjvqo" method="POST">
+        <div class="form-group">
+          <label for="reqName">Your Name <span>*</span></label>
+          <input type="text" id="reqName" name="name" placeholder="Enter your full name" required />
+        </div>
+        
+        <div class="form-group">
+          <label for="reqEmail">Your Email <span>*</span></label>
+          <input type="email" id="reqEmail" name="email" placeholder="Enter your email address" required />
+        </div>
+        
+        <div class="form-group">
+          <label for="reqPurpose">Purpose <span>*</span></label>
+          <textarea id="reqPurpose" name="purpose" placeholder="Why are you requesting this certificate? (e.g., job application, academic verification, etc.)" rows="4" required></textarea>
+        </div>
+
+        <input type="hidden" id="reqCertName" name="certificate" />
+        <input type="hidden" name="_next" value="false" />
+        
+        <button type="submit" class="btn btn-fill" style="width:100%; margin-top:0.5rem;">
+          Send Request
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:16px;height:16px;margin-left:0.5rem;display:inline-block;vertical-align:middle;"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+        </button>
+      </form>
+
+      <p class="cert-modal-note">
+        Your request will be reviewed, and the certificate will be shared with you via email.
+      </p>
+    </div>
+  </div>
+
+  <div class="add-cert-hint reveal">
+    ⚙️ More certifications will be added soon.
   </div>
 </section>
 
@@ -986,18 +1280,6 @@
         <span class="s-arrow">→</span>
       </a>
 
-      <!-- LinkedIn -->
-      <a href="#" class="social-item">
-        <svg class="s-icon" viewBox="0 0 24 24" fill="currentColor">
-          <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
-        </svg>
-        <div class="s-info">
-          <div class="s-name">LinkedIn</div>
-          <div class="s-handle">linkedin.com/in/your-profile</div>
-        </div>
-        <span class="s-arrow">→</span>
-      </a>
-
       <!-- WhatsApp -->
       <a href="https://wa.me/8801521719758" class="social-item" target="_blank" rel="noopener">
         <svg class="s-icon" viewBox="0 0 24 24" fill="currentColor">
@@ -1010,7 +1292,7 @@
         <span class="s-arrow">→</span>
       </a>
 
-      <!-- 📄 CV Download (updated path) -->
+      <!-- CV Download -->
       <a href="Assets/My CV.pdf" class="social-item" target="_blank" rel="noopener">
         <svg class="s-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
           <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
@@ -1032,12 +1314,29 @@
 <!-- ─── FOOTER ─── -->
 <footer>
   <p>© 2026 A.F.M. Mohaimen Khan</p>
-  <p>"Be simple. Be humble. Be a better person."</p>
   <p>KUET · Mechanical Engineering</p>
 </footer>
 
 
+<!-- ─── SCRIPTS ─── -->
 <script>
+  // ─── LOADER ───
+  window.addEventListener('load', function() {
+    setTimeout(function() {
+      document.getElementById('loader').classList.add('hidden');
+    }, 1500);
+  });
+
+  // ─── MOBILE MENU ───
+  function toggleMobileMenu() {
+    document.getElementById('navLinks').classList.toggle('active');
+  }
+
+  function closeMobileMenu() {
+    document.getElementById('navLinks').classList.remove('active');
+  }
+
+  // ─── SCROLL REVEAL ───
   const revealObserver = new IntersectionObserver(entries => {
     entries.forEach(e => {
       if (e.isIntersecting) {
@@ -1061,6 +1360,7 @@
 
   document.querySelectorAll('.card').forEach(el => cardObserver.observe(el));
 
+  // ─── ACTIVE NAV HIGHLIGHT ───
   const sections = document.querySelectorAll('section[id]');
   const navLinks = document.querySelectorAll('.nav-links a');
 
@@ -1075,6 +1375,65 @@
   };
 
   window.addEventListener('scroll', activateLink, { passive: true });
+
+  // ─── CERTIFICATE REQUEST ───
+  function openCertRequest(btn) {
+    const certName = btn.getAttribute('data-cert');
+    document.getElementById('modalCertName').textContent = 'Certificate: ' + certName;
+    document.getElementById('reqCertName').value = certName;
+    document.getElementById('certModal').style.display = 'flex';
+    document.getElementById('certRequestForm').style.display = 'block';
+    const oldSuccess = document.querySelector('.cert-modal-success');
+    if (oldSuccess) oldSuccess.remove();
+    document.getElementById('certRequestForm').reset();
+  }
+
+  function closeCertRequest() {
+    document.getElementById('certModal').style.display = 'none';
+  }
+
+  document.getElementById('certModal').addEventListener('click', function(e) {
+    if (e.target === this) closeCertRequest();
+  });
+
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') closeCertRequest();
+  });
+
+  async function sendCertRequest(event) {
+    event.preventDefault();
+    
+    const form = document.getElementById('certRequestForm');
+    const formData = new FormData(form);
+    
+    try {
+      const response = await fetch(form.action, {
+        method: 'POST',
+        body: formData,
+        headers: { 'Accept': 'application/json' }
+      });
+      
+      if (response.ok) {
+        form.style.display = 'none';
+        const successHTML = `
+          <div class="cert-modal-success">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="56" height="56">
+              <circle cx="12" cy="12" r="10"/>
+              <path d="M8 12l3 3 5-5"/>
+            </svg>
+            <h4>Request Sent!</h4>
+            <p>Thank you! Your request has been received.<br>I will review it and get back to you soon.</p>
+          </div>
+        `;
+        form.insertAdjacentHTML('afterend', successHTML);
+        setTimeout(closeCertRequest, 4000);
+      } else {
+        alert('Oops! Something went wrong. Please try again or email me directly at mksajid087@gmail.com');
+      }
+    } catch (error) {
+      alert('Network error. Please check your connection and try again.');
+    }
+  }
 </script>
 
 </body>
