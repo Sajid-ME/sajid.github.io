@@ -81,7 +81,6 @@ async function sendCertRequest(event) {
   const form = document.getElementById('certRequestForm');
   const formData = new FormData(form);
   
-  // Validate at least one certificate is selected
   const selectedCerts = formData.getAll('certificates');
   if (selectedCerts.length === 0) {
     alert('Please select at least one certificate to request.');
@@ -128,17 +127,17 @@ function typeEffect() {
   const currentWord = words[wordIndex];
   
   if (!isDeleting) {
-    // Typing
     typewriterEl.textContent = currentWord.substring(0, charIndex + 1);
     charIndex++;
     
     if (charIndex === currentWord.length) {
-      // Finished typing, wait then start deleting
-      setTimeout(() => { isDeleting = true; }, 1500);
+      setTimeout(() => {
+        isDeleting = true;
+        typeEffect();   // <-- continue after changing state
+      }, 1500);
       return;
     }
   } else {
-    // Deleting
     typewriterEl.textContent = currentWord.substring(0, charIndex - 1);
     charIndex--;
     
@@ -154,33 +153,15 @@ function typeEffect() {
   setTimeout(typeEffect, speed);
 }
 
-// Start after the hero animations have played (1.2s delay)
 setTimeout(typeEffect, 1200);
 
 // ─── THEME TOGGLE ───
 function toggleTheme() {
   document.body.classList.toggle('light');
-  // Save preference
   const isLight = document.body.classList.contains('light');
   localStorage.setItem('theme', isLight ? 'light' : 'dark');
 }
 
-// Apply saved theme on load
-(function() {
-  const savedTheme = localStorage.getItem('theme');
-  if (savedTheme === 'light') {
-    document.body.classList.add('light');
-  }
-})();
-// ─── THEME TOGGLE ───
-function toggleTheme() {
-  document.body.classList.toggle('light');
-  // Save preference
-  const isLight = document.body.classList.contains('light');
-  localStorage.setItem('theme', isLight ? 'light' : 'dark');
-}
-
-// Apply saved theme on load
 (function() {
   const savedTheme = localStorage.getItem('theme');
   if (savedTheme === 'light') {
