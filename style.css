@@ -11,6 +11,7 @@
   --line:  rgba(232,162,0,0.1);
   --glow:  rgba(232,162,0,0.22);
 }
+
 /* Light theme variables */
 body.light {
   --ink:   #F2F0E9;
@@ -121,27 +122,11 @@ nav {
   text-decoration: none;
 }
 
-/* Hamburger button */
-.hamburger {
-  display: none;
-  flex-direction: column;
-  gap: 5px;
-  background: none;
-  border: none;
-  cursor: pointer;
-  padding: 4px;
-  z-index: 300;
-}
-
-.hamburger span {
-  display: block;
-  width: 24px;
-  height: 2px;
-  background: var(--amber);
-  transition: all 0.3s ease;
-}
-
+/* Center the navigation links */
 .nav-links {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
   display: flex;
   gap: 2.8rem;
   list-style: none;
@@ -171,13 +156,21 @@ nav {
 
 .nav-links a:hover { color: var(--amber); }
 .nav-links a:hover::after { width: 100%; }
+
+/* Right‑side toggle & hamburger container */
+.nav-actions {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-left: auto;          /* push to the right */
+}
+
 /* Theme toggle button */
 .theme-toggle {
   background: none;
   border: none;
   cursor: pointer;
   padding: 4px;
-  margin-right: 1rem;
   color: var(--chalk);
   transition: color 0.3s;
   display: flex;
@@ -192,6 +185,27 @@ nav {
   width: 20px;
   height: 20px;
 }
+
+/* Hamburger button */
+.hamburger {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 4px;
+  z-index: 300;
+}
+
+.hamburger span {
+  display: block;
+  width: 24px;
+  height: 2px;
+  background: var(--amber);
+  transition: all 0.3s ease;
+}
+
 /* ─── HERO ─── */
 #hero {
   position: relative;
@@ -267,6 +281,7 @@ h1.hero-name em {
 }
 
 .hero-sub strong { color: var(--amber); font-weight: 400; }
+
 /* Typewriter cursor blink */
 .typewriter-cursor {
   color: var(--amber);
@@ -625,26 +640,6 @@ h1.hero-name em {
   box-shadow: 0 12px 32px rgba(232,162,0,0.12);
 }
 
-.cert-thumb {
-  height: 200px;
-  background: var(--ink);
-  border-bottom: 1px solid rgba(232,162,0,0.15);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: var(--amber);
-  opacity: 0.8;
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 0.8rem;
-}
-
-.cert-thumb svg {
-  width: 48px;
-  height: 48px;
-  margin-right: 0.8rem;
-  opacity: 0.7;
-}
-
 .cert-info {
   padding: 1.5rem;
   flex: 1;
@@ -809,6 +804,7 @@ h1.hero-name em {
   margin-top: 1.5rem;
   line-height: 1.6;
 }
+
 /* Certificate checkbox list */
 .cert-checkbox-group {
   display: flex;
