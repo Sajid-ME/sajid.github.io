@@ -122,47 +122,12 @@ nav {
   text-decoration: none;
 }
 
-/* Center the navigation links */
-.nav-links {
-  position: absolute;
-  left: 50%;
-  transform: translateX(-50%);
-  display: flex;
-  gap: 2.8rem;
-  list-style: none;
-}
-
-.nav-links a {
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 0.68rem;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  color: var(--chalk);
-  text-decoration: none;
-  transition: color 0.25s;
-  position: relative;
-}
-
-.nav-links a::after {
-  content: '';
-  position: absolute;
-  bottom: -4px;
-  left: 0;
-  width: 0;
-  height: 1px;
-  background: var(--amber);
-  transition: width 0.3s ease;
-}
-
-.nav-links a:hover { color: var(--amber); }
-.nav-links a:hover::after { width: 100%; }
-
 /* Right‑side toggle & hamburger container */
 .nav-actions {
   display: flex;
   align-items: center;
   gap: 1rem;
-  margin-left: auto;          /* push to the right */
+  margin-left: auto;
 }
 
 /* Theme toggle button */
@@ -186,9 +151,9 @@ nav {
   height: 20px;
 }
 
-/* Hamburger button */
+/* Hamburger button – always visible */
 .hamburger {
-  display: none;
+  display: flex;
   flex-direction: column;
   gap: 5px;
   background: none;
@@ -204,6 +169,62 @@ nav {
   height: 2px;
   background: var(--amber);
   transition: all 0.3s ease;
+}
+
+/* Slide‑out panel (used on all screen sizes) */
+.nav-links {
+  position: fixed;
+  top: 0;
+  right: -100%;
+  width: 70%;
+  max-width: 320px;
+  height: 100vh;
+  background: var(--ink);
+  flex-direction: column;
+  padding: 5rem 2rem 2rem;
+  transition: right 0.35s ease;
+  border-left: 1px solid var(--line);
+  z-index: 250;
+  display: flex;
+  gap: 2rem;
+  list-style: none;
+}
+
+.nav-links.active {
+  right: 0;
+}
+
+.nav-links a {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 1rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--chalk);
+  text-decoration: none;
+  transition: color 0.25s;
+  position: relative;
+}
+
+.nav-links a::after {
+  content: '';
+  position: absolute;
+  bottom: -4px;
+  left: 0;
+  width: 0;
+  height: 1px;
+  background: var(--amber);
+  transition: width 0.3s ease;
+}
+
+.nav-links a:hover { color: var(--amber); }
+.nav-links a:hover::after { width: 100%; }
+
+/* On larger screens – keep the slide‑out, but you can increase the panel width slightly */
+@media (min-width: 769px) {
+  .nav-links {
+    width: 300px;               /* fixed width for desktop */
+    max-width: 350px;
+  }
 }
 
 /* ─── HERO ─── */
